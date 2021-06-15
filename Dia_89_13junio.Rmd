@@ -43,7 +43,7 @@ El análisis discriminante cuadrático (Quadratic Discriminant Analysis o QDA) s
 #install.packages("ISLR")
 
 # Exportamos la base de datos: 
-Auto <- write.csv(ISLR::Auto,file = "Auto.csv", row.names = F)
+write.csv(ISLR::Auto,file = "Auto.csv", row.names = F)
 
 # Importar la base datos:
 Auto <- read.csv(file = "Auto.csv", header = T, sep = ",", dec = ".")
@@ -105,6 +105,9 @@ mpg01 <- rep(0, length(mpg))
 mpg01[mpg > median(mpg)] <- 1
 
 Auto <-  data.frame(Auto, mpg01)
+
+# Guardamos los cambios hechos
+write.csv(Auto,file = "Auto.csv", row.names = F)
 
 # Observación de la nueva variable en la base de datos:
 print("# Observación de la nueva variable en la base de datos:")
