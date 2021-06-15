@@ -1,31 +1,17 @@
-```{r, eval=FALSE, include=TRUE}
-"Protocolo:
- 
- 1. Daniel Felipe Villa Rengifo
- 
- 2. Lenguaje: R
- 
- 3. Tema: ANÁLISIS DISCRIMINANTE LINEAL Y CUADRÁTICO EN R (LDA)
- 
- 4. Fuentes:  
-    https://www.r-bloggers.com/2018/11/linear-quadratic-and-regularized-discriminant-analysis/"
-```
-
-> Nota: Como es un tema muy extenso lo veremos en uno o dos replits más.
-
-# ANÁLISIS DISCRIMINANTE LINEAL
-
-El análisis discriminante lineal (Linear Discriminant Analysis o LDA) es un método alternativo más adecuado a la regresión logística cuando la variable cualitativa tiene más de dos niveles (`K ≥ 2`). Supone también un modelo más estable cuando el tamaño muestral `n` es pequeño y la distribución de los predictores es aproximadamente normal en cada una de sus clases. El propósito del LDA es encontrar la combinación lineal de las variables originales que permita la mejor separación entre grupos de un set de datos.
+## ---- eval=FALSE, include=TRUE-------------------------------------------------------
+## "Protocolo:
+## 
+##  1. Daniel Felipe Villa Rengifo
+## 
+##  2. Lenguaje: R
+## 
+##  3. Tema: ANÁLISIS DISCRIMINANTE LINEAL Y CUADRÁTICO EN R (LDA)
+## 
+##  4. Fuentes:
+##     https://www.r-bloggers.com/2018/11/linear-quadratic-and-regularized-discriminant-analysis/"
 
 
-# ANÁLISIS DISCRIMINANTE CUADRÁTICO
-
-
-El análisis discriminante cuadrático (Quadratic Discriminant Analysis o QDA) supone una alternativa al LDA cuando cada clase tiene su propia matriz de covarianza (`Σk`). Al igual que LDA, QDA también asume que las observaciones de cada clase siguen una distribución normal multivariante, así como también introduce las estimaciones de los parámetros en la ecuación del teorema de Bayes para obtener las predicciones.
-
-# Ejercicio
-
-```{r}
+## ------------------------------------------------------------------------------------
 #En este ejercicio trabajaremos con el set de datos "Auto" del paquete "ISLR" y ajustaremos un modelo de LDA y QDA para predecir si el rendimiento del combustible (gas mileage) de un automóvil es alto o bajo en función del resto de predictores del set de datos.
 
 # Instalar el paquete de labase de datos:
@@ -40,35 +26,9 @@ Auto <- read.csv(file = "Auto.csv", header = T, sep = ",", dec = ".")
 
 
 "Consideraremos como \“alto\” un valor mayor a la mediana. Para ello, crearemos una variable binaria a partir de la variable binaria mpg01 que contenga \“1\” si el valor de mpg está por encima de la mediana, y \“0\” si se encuentra por debajo. Al hacer esto, será importante codificar la variable respuesta como factor. Como en este caso contamos con un predictor con (K = 2), la regresión logística también sería una opción."
-```
 
 
-## Nota-Recordatorio:
-
-### Análisis exploratorio de los datos
-
-
-+ `head()` -> Muestra las primeras observaciones de un vector, matriz, tabla, data frame o función.
-
-+ `str()` -> Muestra de manera compacta la estructura interna de un objeto
-
-+ `summary()` -> Resumen de los datos
-
-+ `cor()` -> Calcula los coeficientes de correlación entre variables (solo acepta vectores numéricos)
-
-+ `ggpairs()` -> Combina en un único gráfico diagramas de dispersión, distribución de las variables y los valores de correlación
-
-+ `pairs()` -> Matriz con gráficos de dispersión de las variables cuantitativas
-
-+ `scatterplot3d()` -> Nube de puntos tridimensional
-
-+ `kable()`-> Genera una tabla sencilla a partir de una matriz o data frame
-
-+ `ggplot()` -> Función visualizadora de "GGPlot2" para graficar...
-
-+ `attach()` -> Usando la función attach podemos acceder a los nombres de las variables (columnas) de un data frame sin tener que repetir el nombre del data frame.
-
-```{r}
+## ------------------------------------------------------------------------------------
 # Guardar los OUTPUTS en .txt:
 sink(file = "OUTPUTS.txt")
 
@@ -102,10 +62,9 @@ print(head(Auto, 3))
 # Correlación entre variables (excluyendo la variable cualitativa “name”)
 print("# Correlación entre variables (excluyendo la variable cualitativa “name”)")
 print(cor(Auto[, -9], method = "pearson"))
-```
 
 
-```{r, message=FALSE}
+## ---- message=FALSE------------------------------------------------------------------
 # Importamos librerias:
 library(dplyr)
 #install.packages("GGally")
@@ -175,9 +134,9 @@ pairs(x = Auto[, c("displacement", "weight", "horsepower")],
       main = "Asociación entre varibles Cuantitativas\nEn función del \"rendimiento\"")
 
 dev.off()
-```
 
-```{r, message=FALSE}
+
+## ---- message=FALSE------------------------------------------------------------------
 library(ggplot2)
 library(gridExtra)
 # Representación de distribución en histogramas
@@ -228,12 +187,12 @@ legend("topleft", bty = "n", cex = .6,
        fill = c("green3", "red"))
 
 dev.off()
-```
 
-```{r}
+
+## ------------------------------------------------------------------------------------
 # Explicación de todos los graficos hechos:
 
 "Las variables que muestran mayor asociación con mpg01 y que parecen ser útiles en separar los automóviles según el rendimiento (y que por tanto podrían ayudar a predecir esta variable respuesta) son: [displacement], [weight], [horsepower] y [cylinders].
 
 Sin embargo, hay que tener en cuenta, según se aprecia en los gráficos, que la clase 0 de menor rendimiento solapa con la clase 1 de mayor rendimiento, lo que puede afectar la capacidad predictiva del modelo."
-```
+

@@ -1,3 +1,14 @@
+---
+title: "Dia_89_13junio"
+author: "Daniel Felipe Villa Rengifo"
+date: "14/6/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 ```{r, eval=FALSE, include=TRUE}
 "Protocolo:
  
@@ -237,3 +248,11 @@ dev.off()
 
 Sin embargo, hay que tener en cuenta, según se aprecia en los gráficos, que la clase 0 de menor rendimiento solapa con la clase 1 de mayor rendimiento, lo que puede afectar la capacidad predictiva del modelo."
 ```
+
+
+```{r}
+library(knitr)
+purl("Dia_89_13junio.Rmd", "main.r")
+```
+
+
