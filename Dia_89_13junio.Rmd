@@ -50,7 +50,7 @@ Auto <- read.csv(file = "Auto.csv", header = T, sep = ",", dec = ".")
 
 
 
-"Consideraremos como \“alto\” un valor mayor a la mediana. Para ello, crearemos una variable binaria a partir de la variable binaria mpg01 que contenga \“1\” si el valor de mpg está por encima de la mediana, y \“0\” si se encuentra por debajo. Al hacer esto, será importante codificar la variable respuesta como factor. Como en este caso contamos con un predictor con (K = 2), la regresión logística también sería una opción."
+"Consideraremos como [alto] un valor mayor a la mediana. Para ello, crearemos una variable binaria a partir de la variable binaria mpg01 que contenga [1] si el valor de mpg está por encima de la mediana, y [0] si se encuentra por debajo. Al hacer esto, será importante codificar la variable respuesta como factor. Como en este caso contamos con un predictor con (K = 2), la regresión logística también sería una opción."
 ```
 
 
@@ -142,7 +142,7 @@ boxplot(cylinders ~ mpg01, data = Auto, main = "Cylinders vs mpg01")
 dev.off()
 
 # 2
-png(filename = "Displacementvsmpg01")
+png(filename = "Displacementvsmpg01.png")
 
 boxplot(displacement ~ mpg01, data = Auto, main = "Displacement vs mpg01")
 
@@ -247,10 +247,12 @@ dev.off()
 "Las variables que muestran mayor asociación con mpg01 y que parecen ser útiles en separar los automóviles según el rendimiento (y que por tanto podrían ayudar a predecir esta variable respuesta) son: [displacement], [weight], [horsepower] y [cylinders].
 
 Sin embargo, hay que tener en cuenta, según se aprecia en los gráficos, que la clase 0 de menor rendimiento solapa con la clase 1 de mayor rendimiento, lo que puede afectar la capacidad predictiva del modelo."
+
+sink()
 ```
 
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 library(knitr)
 purl("Dia_89_13junio.Rmd", "main.r")
 ```
